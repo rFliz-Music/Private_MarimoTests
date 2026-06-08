@@ -211,7 +211,6 @@ function render({ model, el }) {
 
     // -----------------------------
     // UPDATE FROM PYTHON
-    // (NO AUTO-PLAY ANYMORE)
     // -----------------------------
     function update() {
         const raw = JSON.parse(model.get("timeline") || "[]");

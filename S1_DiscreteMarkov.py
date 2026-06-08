@@ -24,7 +24,7 @@ def _():
 @app.cell
 def _(Path, anywidget, traitlets):
     class MarkovChainWidget(anywidget.AnyWidget):
-        _esm = Path("./markov_widget.js").read_text()
+        _esm = Path("./widget_markov.js").read_text()
         graph_data = traitlets.Unicode("{}").tag(sync=True)
 
     widget = MarkovChainWidget()    
