@@ -1,1 +1,4 @@
 widget_tests/
+__marimo__/
+__pycache__/
+marimo_TestWidgets.py

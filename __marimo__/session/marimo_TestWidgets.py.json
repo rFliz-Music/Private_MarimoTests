@@ -7,12 +7,12 @@
   "cells": [
     {
       "id": "Hbol",
-      "code_hash": "253a317b819399a9d1213729f7d06df8",
+      "code_hash": "478bd3d9143536f3feae44100328ffa7",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/plain": ""
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"development-test-notebook\">Development Test Notebook</h1>\n<h2 id=\"to-do\">To Do</h2>\n<span class=\"paragraph\">Set callback function system so Widget can talk to python (currently only python talks to the widget)</span></span>"
           }
         }
       ],
@@ -20,7 +20,7 @@
     },
     {
       "id": "MJUe",
-      "code_hash": "890904fe1ef150552aaccd9f7f47e9a9",
+      "code_hash": "29b04bac34d05072d98a4deba7f06829",
       "outputs": [
         {
           "type": "data",
@@ -33,7 +33,7 @@
     },
     {
       "id": "vblA",
-      "code_hash": "86253622b60f93463ec6c17b0f151b8c",
+      "code_hash": "ac61f4b6f4e10058258b5fe7d950eebf",
       "outputs": [
         {
           "type": "data",
@@ -46,7 +46,7 @@
     },
     {
       "id": "bkHC",
-      "code_hash": "96155ec68dd4be6f826e84fa9d463d52",
+      "code_hash": "e48388a024680aed29a5b0899dc1ce46",
       "outputs": [
         {
           "type": "data",
@@ -59,20 +59,7 @@
     },
     {
       "id": "lEQa",
-      "code_hash": "4d55ac9d1bb84e98f06f0b7b9f954719",
-      "outputs": [
-        {
-          "type": "data",
-          "data": {
-            "application/json": "{\"C3\": \"Kakita/C3.wav\", \"C#3\": \"Kakita/C#3.wav\", \"D3\": \"Kakita/D3.wav\", \"D#3\": \"Kakita/D#3.wav\", \"E3\": \"Kakita/E3.wav\", \"F3\": \"Kakita/F3.wav\", \"F#3\": \"Kakita/F#3.wav\", \"G3\": \"Kakita/G3.wav\", \"G#3\": \"Kakita/G#3.wav\", \"A3\": \"Kakita/A3.wav\", \"A#3\": \"Kakita/A#3.wav\", \"B3\": \"Kakita/B3.wav\", \"C4\": \"Kakita/C4.wav\", \"C#4\": \"Kakita/C#4.wav\", \"D4\": \"Kakita/D4.wav\", \"D#4\": \"Kakita/D#4.wav\", \"E4\": \"Kakita/E4.wav\", \"F4\": \"Kakita/F4.wav\", \"F#4\": \"Kakita/F#4.wav\", \"G4\": \"Kakita/G4.wav\", \"G#4\": \"Kakita/G#4.wav\", \"A4\": \"Kakita/A4.wav\", \"A#4\": \"Kakita/A#4.wav\", \"B4\": \"Kakita/B4.wav\"}"
-          }
-        }
-      ],
-      "console": []
-    },
-    {
-      "id": "PKri",
-      "code_hash": "d8640da5af442ea32c8e1f2c19ff75e2",
+      "code_hash": "e08658f01af859ae1b1950624d82a36a",
       "outputs": [
         {
           "type": "data",
@@ -84,29 +71,35 @@
       "console": []
     },
     {
+      "id": "PKri",
+      "code_hash": "4caa95bd5fd8384f86e74c63bbcbc539",
+      "outputs": [],
+      "console": []
+    },
+    {
       "id": "Xref",
-      "code_hash": "cb238ca64f1835bd8dee273f64bc4f04",
+      "code_hash": "31407965e5ec467bf22bf778fb8ef4a6",
       "outputs": [
         {
-          "type": "error",
-          "ename": "exception",
-          "evalue": "name 'samples' is not defined",
-          "traceback": null
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
         }
       ],
-      "console": [
-        {
-          "type": "stream",
-          "name": "stderr",
-          "text": "<span class=\"codehilite\"><div class=\"highlight\"><pre><span></span><span class=\"gt\">Traceback (most recent call last):</span>\n  File <span class=\"nb\">&quot;/var/folders/qy/ntz_mg4n1h70v9bdxm6563nr0000gn/T/marimo_37568/__marimo__cell_Xref_.py&quot;</span>, line <span class=\"m\">17</span>, in <span class=\"n\">&lt;module&gt;</span>\n<span class=\"w\">    </span><span class=\"n\">samples</span><span class=\"o\">=</span><span class=\"n\">samples</span><span class=\"p\">,</span>\n<span class=\"w\">            </span><span class=\"pm\">^^^^^^^</span>\n<span class=\"gr\">NameError</span>: <span class=\"n\">name &#39;samples&#39; is not defined. Did you mean: &#39;samplesy&#39;?</span>\n</pre></div>\n</span>",
-          "mimetype": "application/vnd.marimo+traceback"
-        }
-      ]
+      "console": []
     },
     {
       "id": "SFPL",
-      "code_hash": "04593088de1e86bdf8f3a31e35776893",
-      "outputs": [],
+      "code_hash": "15f0d8e5feb09ca1296ac741d606d87c",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
       "console": []
     },
     {
@@ -117,6 +110,18 @@
     },
     {
       "id": "RGSE",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "Kclp",
+      "code_hash": null,
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "emfo",
       "code_hash": null,
       "outputs": [],
       "console": []

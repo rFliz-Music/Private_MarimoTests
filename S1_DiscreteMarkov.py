@@ -6,6 +6,9 @@ app = marimo.App(width="medium")
 
 @app.cell
 def _():
+    import sys
+    sys.path.append("./python_scripts")
+
     from pathlib import Path
     import json
 
@@ -24,11 +27,10 @@ def _():
 @app.cell
 def _(Path, anywidget, traitlets):
     class MarkovChainWidget(anywidget.AnyWidget):
-        _esm = Path("./widget_markov.js").read_text()
+        _esm = Path("./widgets/widget_markov.js").read_text()
         graph_data = traitlets.Unicode("{}").tag(sync=True)
 
     widget = MarkovChainWidget()    
-
     return (widget,)
 
 
@@ -39,12 +41,12 @@ def _(json, np, widget):
     A = np.array([
         [0.0, 0.1, 0.0],
         [0.1, 0.0, 0.3],
-        [0.1, 0.0, 0.0],
+        [0.1, 0.0, 0.0],    
     ])
 
     widget.graph_data = json.dumps({
         "matrix": A.tolist(),
-        "threshold": 0.05
+        "threshold": 0.01
     })
 
     widget
