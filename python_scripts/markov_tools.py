@@ -9,10 +9,15 @@ class EventTuple:
     pitch: int
     velocity: int
     duration: float
+    delta: float    
 
     @property
     def asArray(self):
-        return [self.pitch, self.velocity, self.duration]
+        return [self.pitch, self.velocity, self.duration, self.delta]
+    
+
+    def connect_to(self, destination, weight=1):
+        self.chain.connect(self)
 
 
 @dataclass
@@ -27,6 +32,7 @@ class MarkovChain:
     def __init__(self):
         self.matrix = np.zeros((0, 0), dtype=float)
         self.nodeDict = {} # index -> node_value (could be of type event tuple or another markov chain...)  
+        self.lastPlayed = 0 # index of last played node
 
     @property
     def n_states(self):
@@ -73,9 +79,10 @@ class MarkovChain:
         return np.random.choice(self.n_states, p=probs)
 
 
-    def walk(self, start, length):
+    def walk(self, start, length, include_start=True):
         current = start
-        out = [current]
+
+        out = [current] if include_start else []
 
         for _ in range(length - 1):
             current = self.step(current)
@@ -88,19 +95,19 @@ class MarkovChain:
 
 # Given the coarsest markov chain in a markov chain ensemble and an integer n, 
 # generate n number of steps in a markov walk relevant to the coarsest markov chain
-
-def global_MarkovWalk(mc, n, start_idx=0):
-    global_seq = [mc.nodeDict[x] for x in mc.walk(start_idx, n)]    
+def global_MarkovWalk(mc, n, start_idx=0, include_start=True):
+    walk = mc.walk(start_idx, n, include_start)
+    global_seq = [mc.nodeDict[x] for x in walk]    
 
     out = []
 
-    for node in global_seq:
+    for idx,node in zip(walk, global_seq):
         if type(node).__name__ == "EventTuple":
-            out.append([node.pitch, node.velocity, node.duration])            
+            out.append([node.pitch, node.velocity, node.duration, node.delta])         
+            mc.lastPlayed = idx            
         else:
             nodeDict = node.chain.nodeDict
-            current = node.start_idx
-            # delta = nodeDict[current].duration
+            current = node.start_idx            
             delta = 0
 
             working = True
@@ -118,6 +125,7 @@ def global_MarkovWalk(mc, n, start_idx=0):
                     event[2] = (event[2] - (delta - node.duration)) # Trim the offending event's duration to fit
 
                 out.append(event)
+                node.chain.lastPlayed = current
 
     return out
 

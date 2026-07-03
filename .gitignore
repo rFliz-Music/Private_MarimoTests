@@ -1,4 +1,11 @@
+marimo_venv/
+.DS_Store
+
 widget_tests/
 __marimo__/
 __pycache__/
+
+widgets/node_modules/
+widgets/dist/
+
 marimo_TestWidgets.py

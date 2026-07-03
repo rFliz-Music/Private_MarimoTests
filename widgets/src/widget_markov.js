@@ -1,4 +1,5 @@
-import * as d3 from "https://esm.sh/d3@7";
+// import * as d3 from "https://esm.sh/d3@7";
+import * as d3 from "d3";
 
 function render({ model, el }) {
     const width = 1000;
