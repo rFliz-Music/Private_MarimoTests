@@ -59,7 +59,7 @@ export class EventStreamPlayer {
         // receive Python chunks
         this.model.on("change:chunk", () => {
             const chunk = this.model.get("chunk");
-            console.log(chunk.events)
+            // console.log(chunk.events)
             this.receiveChunk(chunk.events);
         });
     }
@@ -129,18 +129,13 @@ export class EventStreamPlayer {
 
         this.model.save_changes();
 
-        console.log("JS: requested!");
+        // console.log("JS: Succesfully requested chunk");
     }
 
     receiveChunk(chunk) {
         if (!this.active) return;
 
-        // if (!chunk || chunk.length === 0) {
-        //     console.warn("Ignoring empty chunk");    
-        //     return;
-        // }
-
-        console.log("JS: Received chunk", chunk);
+        // console.log("JS: Received chunk", chunk);
         this.waitingForChunk = false;
         this.scheduleChunk(chunk);
     }
@@ -164,10 +159,10 @@ export class EventStreamPlayer {
         this.scheduledEventIds = keep;
 
         // Debugging
-        console.log(
-            "Active scheduled events:",
-            this.scheduledEventIds.length
-        );
+        // console.log(
+        //     "Active scheduled events:",
+        //     this.scheduledEventIds.length
+        // );
     }
 
     

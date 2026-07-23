@@ -23,18 +23,32 @@
       "code_hash": "46e1c730e09d217860bed2831fa0c43a",
       "outputs": [
         {
-          "type": "data",
-          "data": {
-            "text/plain": ""
-          }
+          "type": "error",
+          "ename": "exception",
+          "evalue": "[Errno 2] No such file or directory: 'widgets/widget_markov.js'",
+          "traceback": null
         }
       ],
-      "console": []
+      "console": [
+        {
+          "type": "stream",
+          "name": "stderr",
+          "text": "<span class=\"codehilite\"><div class=\"highlight\"><pre><span></span><span class=\"gt\">Traceback (most recent call last):</span>\n  File <span class=\"nb\">&quot;/var/folders/qy/ntz_mg4n1h70v9bdxm6563nr0000gn/T/marimo_4257/__marimo__cell_MJUe_.py&quot;</span>, line <span class=\"m\">1</span>, in <span class=\"n\">&lt;module&gt;</span>\n<span class=\"w\">    </span><span class=\"k\">class</span><span class=\"w\"> </span><span class=\"nc\">MarkovChainWidget</span><span class=\"p\">(</span><span class=\"n\">anywidget</span><span class=\"o\">.</span><span class=\"n\">AnyWidget</span><span class=\"p\">):</span>\n<span class=\"w\">    </span>    <span class=\"n\">_esm</span> <span class=\"o\">=</span> <span class=\"n\">Path</span><span class=\"p\">(</span><span class=\"s2\">&quot;./widgets/widget_markov.js&quot;</span><span class=\"p\">)</span><span class=\"o\">.</span><span class=\"n\">read_text</span><span class=\"p\">()</span>\n<span class=\"w\">    </span>    <span class=\"n\">graph_data</span> <span class=\"o\">=</span> <span class=\"n\">traitlets</span><span class=\"o\">.</span><span class=\"n\">Unicode</span><span class=\"p\">(</span><span class=\"s2\">&quot;</span><span class=\"si\">{}</span><span class=\"s2\">&quot;</span><span class=\"p\">)</span><span class=\"o\">.</span><span class=\"n\">tag</span><span class=\"p\">(</span><span class=\"n\">sync</span><span class=\"o\">=</span><span class=\"kc\">True</span><span class=\"p\">)</span>\n  File <span class=\"nb\">&quot;/var/folders/qy/ntz_mg4n1h70v9bdxm6563nr0000gn/T/marimo_4257/__marimo__cell_MJUe_.py&quot;</span>, line <span class=\"m\">2</span>, in <span class=\"n\">MarkovChainWidget</span>\n<span class=\"w\">    </span><span class=\"n\">_esm</span> <span class=\"o\">=</span> <span class=\"n\">Path</span><span class=\"p\">(</span><span class=\"s2\">&quot;./widgets/widget_markov.js&quot;</span><span class=\"p\">)</span><span class=\"o\">.</span><span class=\"n\">read_text</span><span class=\"p\">()</span>\n  File <span class=\"nb\">&quot;/opt/homebrew/Cellar/python@3.13/3.13.0_1/Frameworks/Python.framework/Versions/3.13/lib/python3.13/pathlib/_local.py&quot;</span>, line <span class=\"m\">546</span>, in <span class=\"n\">read_text</span>\n<span class=\"w\">    </span><span class=\"k\">return</span> <span class=\"n\">PathBase</span><span class=\"o\">.</span><span class=\"n\">read_text</span><span class=\"p\">(</span><span class=\"bp\">self</span><span class=\"p\">,</span> <span class=\"n\">encoding</span><span class=\"p\">,</span> <span class=\"n\">errors</span><span class=\"p\">,</span> <span class=\"n\">newline</span><span class=\"p\">)</span>\n<span class=\"w\">           </span><span class=\"pm\">~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>\n  File <span class=\"nb\">&quot;/opt/homebrew/Cellar/python@3.13/3.13.0_1/Frameworks/Python.framework/Versions/3.13/lib/python3.13/pathlib/_abc.py&quot;</span>, line <span class=\"m\">632</span>, in <span class=\"n\">read_text</span>\n<span class=\"w\">    </span><span class=\"k\">with</span> <span class=\"bp\">self</span><span class=\"o\">.</span><span class=\"n\">open</span><span class=\"p\">(</span><span class=\"n\">mode</span><span class=\"o\">=</span><span class=\"s1\">&#39;r&#39;</span><span class=\"p\">,</span> <span class=\"n\">encoding</span><span class=\"o\">=</span><span class=\"n\">encoding</span><span class=\"p\">,</span> <span class=\"n\">errors</span><span class=\"o\">=</span><span class=\"n\">errors</span><span class=\"p\">,</span> <span class=\"n\">newline</span><span class=\"o\">=</span><span class=\"n\">newline</span><span class=\"p\">)</span> <span class=\"k\">as</span> <span class=\"n\">f</span><span class=\"p\">:</span>\n<span class=\"w\">         </span><span class=\"pm\">~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>\n  File <span class=\"nb\">&quot;/opt/homebrew/Cellar/python@3.13/3.13.0_1/Frameworks/Python.framework/Versions/3.13/lib/python3.13/pathlib/_local.py&quot;</span>, line <span class=\"m\">537</span>, in <span class=\"n\">open</span>\n<span class=\"w\">    </span><span class=\"k\">return</span> <span class=\"n\">io</span><span class=\"o\">.</span><span class=\"n\">open</span><span class=\"p\">(</span><span class=\"bp\">self</span><span class=\"p\">,</span> <span class=\"n\">mode</span><span class=\"p\">,</span> <span class=\"n\">buffering</span><span class=\"p\">,</span> <span class=\"n\">encoding</span><span class=\"p\">,</span> <span class=\"n\">errors</span><span class=\"p\">,</span> <span class=\"n\">newline</span><span class=\"p\">)</span>\n<span class=\"w\">           </span><span class=\"pm\">~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>\n<span class=\"gr\">FileNotFoundError</span>: <span class=\"n\">[Errno 2] No such file or directory: &#39;widgets/widget_markov.js&#39;</span>\n</pre></div>\n</span>",
+          "mimetype": "application/vnd.marimo+traceback"
+        }
+      ]
     },
     {
       "id": "vblA",
       "code_hash": "40405570a1f563affbc8f2fafd0159ca",
-      "outputs": [],
+      "outputs": [
+        {
+          "type": "error",
+          "ename": "exception",
+          "evalue": "An ancestor raised an exception (FileNotFoundError): ",
+          "traceback": null
+        }
+      ],
       "console": []
     },
     {

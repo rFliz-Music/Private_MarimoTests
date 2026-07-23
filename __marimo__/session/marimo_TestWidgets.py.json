@@ -7,12 +7,12 @@
   "cells": [
     {
       "id": "Hbol",
-      "code_hash": "40be9d47e1f514c1cef99258d4a00d66",
+      "code_hash": "69ea01261c503b2bc0c142218e72326d",
       "outputs": [
         {
           "type": "data",
           "data": {
-            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"marimo-development-test-notebook\">Marimo Development Test Notebook</h1>\n<h2 id=\"to-do\">To Do</h2>\n<ul>\n<li>Write <strong>esbundler</strong> bundler so development can be made modular</li>\n<li>See if we can integrate with opycleid: <a href=\"https://alexpof.github.io/opycleid/gettingstarted/\" rel=\"noopener noreferrer\" target=\"_blank\">https://alexpof.github.io/opycleid/gettingstarted/</a></li>\n<li><del>Refactor now that we have infinite stream capabilities.</del></li>\n<li><del>Set callback function system so Widget can talk to python (currently only python talks to the widget)</del></li>\n</ul>\n<h2 id=\"references\">References</h2>\n<h3 id=\"the-one-the-generalized-tonnetz-tymoczko\">The one... The Generalized Tonnetz (Tymoczko)</h3>\n<span class=\"paragraph\"><a href=\"https://dmitri.mycpanel.princeton.edu/tonnetzes.pdf\" rel=\"noopener noreferrer\" target=\"_blank\">https://dmitri.mycpanel.princeton.edu/tonnetzes.pdf</a></span>\n<h3 id=\"pk-nets\">PK-Nets</h3>\n<span class=\"paragraph\"><a href=\"http://repmus.ircam.fr/_media/moreno/pk-nets_pnm_draft_version.pdf\" rel=\"noopener noreferrer\" target=\"_blank\">http://repmus.ircam.fr/_media/moreno/pk-nets_pnm_draft_version.pdf</a></span>\n<h3 id=\"cube-dance\">CUBE DANCE \ud83d\udd25!!!</h3>\n<span class=\"paragraph\"><a href=\"https://alexpof.github.io/interactive_mathmusic/Pmn_graphs/pmn_graphs.html\" rel=\"noopener noreferrer\" target=\"_blank\">https://alexpof.github.io/interactive_mathmusic/Pmn_graphs/pmn_graphs.html</a></span>\n<h3 id=\"three-conceptions-of-musical-distance\">Three Conceptions of Musical Distance</h3>\n<span class=\"paragraph\"><a href=\"https://dmitri.mycpanel.princeton.edu/files/publications/distance.pdf\" rel=\"noopener noreferrer\" target=\"_blank\">https://dmitri.mycpanel.princeton.edu/files/publications/distance.pdf</a></span></span>"
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"marimo-development-test-notebook\">Marimo Development Test Notebook</h1>\n<h2 id=\"to-do\">To Do</h2>\n<ul>\n<li>Test Graphic Markov Widget</li>\n<li><del>Write <strong>esbundler</strong> bundler so development can be made modular</del></li>\n<li><del>Refactor now that we have infinite stream capabilities.</del></li>\n<li><del>Set callback function system so Widget can talk to python (currently only python talks to the widget)</del></li>\n</ul>\n<h2 id=\"references\">References</h2>\n<h3 id=\"the-one-the-generalized-tonnetz-tymoczko\">The one... The Generalized Tonnetz (Tymoczko)</h3>\n<span class=\"paragraph\"><a href=\"https://dmitri.mycpanel.princeton.edu/tonnetzes.pdf\" rel=\"noopener noreferrer\" target=\"_blank\">https://dmitri.mycpanel.princeton.edu/tonnetzes.pdf</a></span>\n<h3 id=\"pk-nets\">PK-Nets</h3>\n<span class=\"paragraph\"><a href=\"http://repmus.ircam.fr/_media/moreno/pk-nets_pnm_draft_version.pdf\" rel=\"noopener noreferrer\" target=\"_blank\">http://repmus.ircam.fr/_media/moreno/pk-nets_pnm_draft_version.pdf</a></span>\n<h3 id=\"cube-dance\">CUBE DANCE \ud83d\udd25!!!</h3>\n<span class=\"paragraph\"><a href=\"https://alexpof.github.io/interactive_mathmusic/Pmn_graphs/pmn_graphs.html\" rel=\"noopener noreferrer\" target=\"_blank\">https://alexpof.github.io/interactive_mathmusic/Pmn_graphs/pmn_graphs.html</a></span>\n<h3 id=\"three-conceptions-of-musical-distance\">Three Conceptions of Musical Distance</h3>\n<span class=\"paragraph\"><a href=\"https://dmitri.mycpanel.princeton.edu/files/publications/distance.pdf\" rel=\"noopener noreferrer\" target=\"_blank\">https://dmitri.mycpanel.princeton.edu/files/publications/distance.pdf</a></span></span>"
           }
         }
       ],
@@ -20,7 +20,7 @@
     },
     {
       "id": "MJUe",
-      "code_hash": "d74e2ddd7ad04e4c9aeed2ece5dc432c",
+      "code_hash": "7a2435acf92d95aaeda627afe2928c6e",
       "outputs": [
         {
           "type": "data",
@@ -33,7 +33,7 @@
     },
     {
       "id": "vblA",
-      "code_hash": "cc8a3cca1b7d6a58b20c4ba3c48900fb",
+      "code_hash": "ab56f9f3c760d043b13eebec5036121a",
       "outputs": [
         {
           "type": "data",
@@ -46,7 +46,7 @@
     },
     {
       "id": "bkHC",
-      "code_hash": "5bcb7dc886985ff94f894bbb48bdc3ac",
+      "code_hash": "f3fa07128da5f03e8290f5cc30e26b1b",
       "outputs": [
         {
           "type": "data",
@@ -59,19 +59,6 @@
     },
     {
       "id": "lEQa",
-      "code_hash": "33adfb2c2feccb4c58969469ebfcd26a",
-      "outputs": [
-        {
-          "type": "data",
-          "data": {
-            "text/plain": ""
-          }
-        }
-      ],
-      "console": []
-    },
-    {
-      "id": "PKri",
       "code_hash": "61221d11fef805b0b5ed6022cb76c8ee",
       "outputs": [
         {
@@ -85,19 +72,19 @@
         {
           "type": "stream",
           "name": "stdout",
-          "text": "[[1 1 0 0]\n [1 1 0 1]\n [1 0 1 1]\n [1 1 1 1]]\n",
+          "text": "[[0 0 1 1 1 0 0 1]\n [1 1 0 0 1 0 1 0]\n [0 1 1 1 0 0 0 1]\n [1 0 1 0 1 0 1 0]\n [0 0 1 1 0 1 0 0]\n [0 1 0 1 1 0 0 1]\n [0 1 0 0 0 1 1 1]\n [1 1 0 0 0 0 0 0]]\n",
           "mimetype": "text/plain"
         }
       ]
     },
     {
-      "id": "Xref",
-      "code_hash": "c2d8824c84b8834b49c9b364a8d8d13f",
+      "id": "PKri",
+      "code_hash": "7454550bb759893323f0c4b5f0b8bd9a",
       "outputs": [],
       "console": []
     },
     {
-      "id": "SFPL",
+      "id": "Xref",
       "code_hash": "a039de4905f445a2557d6a153b25ea0e",
       "outputs": [
         {
@@ -110,16 +97,9 @@
       "console": []
     },
     {
-      "id": "BYtC",
+      "id": "SFPL",
       "code_hash": "ec9cc4027bfe98cace524f7197be19d8",
-      "outputs": [
-        {
-          "type": "data",
-          "data": {
-            "text/plain": ""
-          }
-        }
-      ],
+      "outputs": [],
       "console": []
     }
   ]

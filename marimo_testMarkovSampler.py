@@ -11,8 +11,8 @@ def _(mo):
 
     ## To Do
 
-    - Write **esbundler** bundler so development can be made modular
-    - See if we can integrate with opycleid: https://alexpof.github.io/opycleid/gettingstarted/
+    - Test Graphic Markov Widget
+    - ~~Write **esbundler** bundler so development can be made modular~~
     - ~~Refactor now that we have infinite stream capabilities.~~
     - ~~Set callback function system so Widget can talk to python (currently only python talks to the widget)~~
 
@@ -53,60 +53,21 @@ def _():
 
     import numpy as np
 
+    from widget_sampler import SampleBank, SamplerWidget, eventHandler_MC
+
     return (
         EventTuple,
         MarkovChain,
-        anywidget,
-        global_MarkovWalk,
+        SampleBank,
+        SamplerWidget,
+        eventHandler_MC,
         mo,
         np,
-        traceback,
-        traitlets,
     )
 
 
-@app.class_definition
-# Given a URL containing references to audio files, 
-# provides multiple ways to map note names (across octaves) to individual URLS
-class SampleBank:
-    def __init__(self, base_url: str, prefix="SynthSample_"):
-        self.base_url = base_url
-        self.prefix = prefix
-
-    def map_chromatic(self, start_octave=3, num_octaves=1):
-        chromatic = ["C", "C#", "D", "D#", "E", "F",
-                     "F#", "G", "G#", "A", "A#", "B"]
-
-        notes = [
-            f"{note}{octave}"
-            for octave in range(start_octave, start_octave + num_octaves)
-            for note in chromatic
-        ]
-
-        samples = {
-            note: f"{self.base_url}/{self.prefix}{i}.ogg"
-            for i, note in enumerate(notes)
-        }
-
-        return samples
-
-
 @app.cell
-def _(anywidget, np, traitlets):
-    class MC_SamplerWidget(anywidget.AnyWidget):
-        _esm = "./widgets/dist/widget_sampler.js"
-        _css = "./widgets/dist/widget_sampler.css"
-
-        # State
-        samples = traitlets.Dict().tag(sync=True)
-        timeline = traitlets.List().tag(sync=True) # Scheduled Timeline (with start time per event)
-
-        chunk = traitlets.Dict().tag(sync=True) # Event Buffer
-
-        # events (callbacks)
-        event = traitlets.Dict(default_value={}).tag(sync=True)
-
-
+def _(np):
 
     def int_noise(span):
         return np.random.randint(span)-(span*0.5)
@@ -116,14 +77,14 @@ def _(anywidget, np, traitlets):
 
 
 
-    STATE = {'mc': None}    
-    return MC_SamplerWidget, STATE, choice
+    SESSION = {'mc': None}    
+    return SESSION, choice
 
 
 @app.cell
-def _(EventTuple, MarkovChain, STATE, choice, np):
+def _(EventTuple, MarkovChain, SESSION, choice, np):
     # Markov Chain Stuff
-    NODE_NUM = 4
+    NODE_NUM = 8
     pc_set = np.array([0,2,4,5,7,9,11]) + 48
     tempo = 0.5
     mc = MarkovChain()
@@ -134,7 +95,7 @@ def _(EventTuple, MarkovChain, STATE, choice, np):
 
 
     for _ in range(NODE_NUM):
-        pitch = int(choice(pc_set))
+        pitch = int(choice(pc_set)) + 0
         vel = int(choice([100,70]))
         dur = float(choice([0.125,0.111,0.333]) * tempo)
         delta = float(choice([0.75, 0.25, 0.5, 2]) * tempo)
@@ -147,7 +108,7 @@ def _(EventTuple, MarkovChain, STATE, choice, np):
 
     # print(mc.nodeDict)
 
-    STATE['mc'] = mc
+    SESSION['mc'] = mc
     return (mc,)
 
 
@@ -158,47 +119,7 @@ def _(mc):
 
 
 @app.cell
-def _(
-    MC_SamplerWidget,
-    STATE,
-    global_MarkovWalk,
-    np,
-    testPythonFunc,
-    traceback,
-):
-
-    def eventHandler_MC(change, widg):    
-        # global STATE
-        try:
-            event = change["new"]  
-            match event["type"]:
-                case "generate_timeline":                        
-                    testPythonFunc(change)                
-                    print(event['property'])
-
-                case "request_chunk":     
-
-                    # print("Python: JS Requested events!")
-                    n = event["n"]    
-                    events = global_MarkovWalk(STATE['mc'], n, STATE['mc'].lastPlayed, include_start=False)             
-
-                    # print(f"Python: Serving: {events}!")
-
-
-                    # Forcing Uniqueness                
-                    widg.chunk = {
-                        "events" : events,
-                        "timestamp" : np.random.random(),
-                    }
-
-
-            w.event = dict({"type":""})  # reset trigger
-
-        except BaseException:        
-            traceback.print_exc()
-
-
-    # ============================================================
+def _(SESSION, SampleBank, SamplerWidget, eventHandler_MC):
 
 
     bank = SampleBank("https://cdn.jsdelivr.net/gh/rFliz-music/Private_MarimoTests@main/synth_samples")
@@ -206,8 +127,8 @@ def _(
     samples = bank.map_chromatic(start_octave=3, num_octaves=2)
 
 
-    w = MC_SamplerWidget(samples=samples)
-    w.observe(lambda change: eventHandler_MC(change, w), names="event")   
+    w = SamplerWidget(samples=samples)
+    w.observe(lambda change: eventHandler_MC(change, w, SESSION), names="event")   
 
 
     w
