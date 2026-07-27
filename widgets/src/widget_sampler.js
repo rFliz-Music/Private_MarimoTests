@@ -3,9 +3,10 @@ import * as Tone from "tone";
 import "./widget_sampler.css";
 import { EventTimelinePlayer, EventStreamPlayer } from "./engine_audio.js";
 
+// Widget Adapter
 function render({ model, el }) {
 
-    createWidget(el);
+    createWidget(el); 
 
     model.on("change:timeline", () => {   
         console.log("Timeline Updated")

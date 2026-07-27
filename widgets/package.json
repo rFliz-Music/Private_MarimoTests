@@ -4,7 +4,7 @@
   "main": "widget_markov.js",
   "scripts": {
     "build": "node build.js",
-    "watch": "node build.js"
+    "watch": "esbuild src/widget_markov_viz.js --bundle --format=esm --outfile=dist/widget_markov_viz.js --watch"
   },
   "keywords": [],
   "author": "",

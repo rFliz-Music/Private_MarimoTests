@@ -53,14 +53,15 @@ def _():
 
     import numpy as np
 
-    from widget_sampler import SampleBank, SamplerWidget, eventHandler_MC
+    from widget_sampler import SampleBank, SamplerWidget
+    from widget_handlers import MarkovHandler
 
     return (
         EventTuple,
         MarkovChain,
+        MarkovHandler,
         SampleBank,
         SamplerWidget,
-        eventHandler_MC,
         mo,
         np,
     )
@@ -119,17 +120,18 @@ def _(mc):
 
 
 @app.cell
-def _(SESSION, SampleBank, SamplerWidget, eventHandler_MC):
+def _(MarkovHandler, SESSION, SampleBank, SamplerWidget):
 
 
     bank = SampleBank("https://cdn.jsdelivr.net/gh/rFliz-music/Private_MarimoTests@main/synth_samples")
 
     samples = bank.map_chromatic(start_octave=3, num_octaves=2)
 
-
     w = SamplerWidget(samples=samples)
-    w.observe(lambda change: eventHandler_MC(change, w, SESSION), names="event")   
+    handler = MarkovHandler(w, SESSION)
 
+
+    w.observe(lambda change: handler.dispatch(change), names="event")   
 
     w
     return

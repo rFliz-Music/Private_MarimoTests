@@ -47,37 +47,3 @@ class SamplerWidget(anywidget.AnyWidget):
 
 
 
-# The Event handler is the one that creates the markov chain behavior...
-# by describing the callbacks for the more generic samper widget :D 
-def eventHandler_MC(change, widg, session):    
-    try:
-        event = change["new"]  
-        match event["type"]:
-            case "generate_timeline":                        
-                # testPythonFunc(change)                
-                # print(event['property'])
-                pass
-
-            case "request_chunk":     
-                # print("Python: JS Requested events!")
-                n = event["n"]    
-                events = global_MarkovWalk(session['mc'], 
-                                        n, 
-                                        session['mc'].lastPlayed,
-                                        include_start=False)             
-
-                # print(f"Python: Serving: {events}!")
-
-                # Forcing Uniqueness                
-                widg.chunk = {
-                    "events" : events,
-                    "timestamp" : np.random.random(),
-                }
-
-
-        widg.event = dict({"type":""})  # reset trigger
-
-    except BaseException:       
-        print("Something went wrong :/") 
-        traceback.print_exc()
-        print("Traceback end.")
