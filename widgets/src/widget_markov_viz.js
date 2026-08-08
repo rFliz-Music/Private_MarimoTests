@@ -45,6 +45,7 @@ export class MarkovGraph {
         // Contextual Menu (Hover nodes)
         this.tooltip = applyStyles(d3.select(el).append("div"), GraphTheme.tooltip.styles);
 
+        // FIXME: Check this out
         // Arrowheads
         const marker = applyAttributes(
             this.svg.append("defs").append("marker"),
@@ -74,7 +75,7 @@ export class MarkovGraph {
     }
 
 
-
+    // Transform an adjacency matrix into a Nodes & Edges list representation.
     adjacencyToGraph(matrix, threshold = 0.0) {
         const n = matrix.length;
 
@@ -86,7 +87,11 @@ export class MarkovGraph {
 
                 const w = matrix[i][j]; 
                 if (w > threshold) {
-                    links.push({source: i, target: j, weight: w
+                    // links.push({source: i, target: j, weight: w });
+
+                    const reciprocal = matrix[j][i] > threshold;
+                    links.push({ source: i, target: j, weight: w,
+                        curvature: reciprocal ? 30 : 0
                     });
                 }
             }
@@ -112,15 +117,7 @@ export class MarkovGraph {
         //------------------------------------------------
         // Links
         //------------------------------------------------
-    
-        // FIXME: Old Code for renderling links!
-
-        // this.graphLinks = this.g.append("g")
-        //     .selectAll("line")
-        //     .data(links)
-        //     .join("line")
-
-        // applyAttributes(this.graphLinks, GraphTheme.edge)
+            
 
         this.graphLinks = this.g.append("g")
             .selectAll("path")
@@ -130,6 +127,9 @@ export class MarkovGraph {
             .attr("stroke-width", 1.25)
             .attr("fill", "none")
             .attr("marker-end", "url(#arrowhead)");
+
+
+        // applyAttributes(this.graphLinks, GraphTheme.edge)
     
         //------------------------------------------------
         // Nodes
@@ -171,17 +171,12 @@ export class MarkovGraph {
     
 
         this.simulation.on("tick", () => {
-            // this.graphLinks
-            //     .attr("x1", d => d.source.x)
-            //     .attr("y1", d => d.source.y)
-            //     .attr("x2", d => d.target.x)
-            //     .attr("y2", d => d.target.y);
 
             this.graphLinks.attr("d", link =>
                 curvedLinkPath(
                     link.source,
                     link.target,
-                    0
+                    link.curvature
                 )
             );
     
@@ -376,26 +371,53 @@ function applyAttributes(selection, attributes) {
 // ================= Geometry Rendering =================
 // ======================================================
 
-function curvedLinkPath(source, target, curvature = 40) {
+
+
+function curvedLinkPath(source, target, curvature = 40, radius = 20) {
 
     const dx = target.x - source.x;
     const dy = target.y - source.y;
 
     const distance = Math.sqrt(dx * dx + dy * dy);
 
-    // Midpoint of the straight-line axis
+    // Control point
     const mx = (source.x + target.x) / 2;
     const my = (source.y + target.y) / 2;
 
-    // Perpendicular unit vector
     const px = -dy / distance;
     const py = dx / distance;
 
-    // Move the control point perpendicular to the axis
     const cx = mx + px * curvature;
     const cy = my + py * curvature;
 
-    return `M ${source.x},${source.y} Q ${cx},${cy} ${target.x},${target.y}`;
+
+    // Source endpoint:
+    // move from source toward the control point
+    const sx = cx - source.x;
+    const sy = cy - source.y;
+
+    const sourceDistance = Math.sqrt(sx * sx + sy * sy);
+
+    const start = {
+        x: source.x + (sx / sourceDistance) * radius,
+        y: source.y + (sy / sourceDistance) * radius
+    };
+
+
+    // Target endpoint:
+    // move from target toward the control point
+    const tx = cx - target.x;
+    const ty = cy - target.y;
+
+    const targetDistance = Math.sqrt(tx * tx + ty * ty);
+
+    const end = {
+        x: target.x + (tx / targetDistance) * radius,
+        y: target.y + (ty / targetDistance) * radius
+    };
+
+
+    return `M ${start.x},${start.y} Q ${cx},${cy} ${end.x},${end.y}`;
 }
 
 
