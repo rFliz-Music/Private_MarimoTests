@@ -8,14 +8,14 @@ import { GraphTheme } from "./graph_themes.js";
 function render({ model, el }) {    
     const graph = new MarkovGraph(el)
     model.on("change:graph_data", () => graph.updateGraph(JSON.parse(model.get("graph_data"))));
-    graph.updateGraph(JSON.parse(model.get("graph_data")));
-    
+    graph.updateGraph(JSON.parse(model.get("graph_data")));     
 }
+
+export default { render };
 
 
 
 export class MarkovGraph {
-
     constructor(el, width=400, height=400) {
 
         this.el = el;
@@ -44,8 +44,7 @@ export class MarkovGraph {
 
         // Contextual Menu (Hover nodes)
         this.tooltip = applyStyles(d3.select(el).append("div"), GraphTheme.tooltip.styles);
-
-        // FIXME: Check this out
+        
         // Arrowheads
         const marker = applyAttributes(
             this.svg.append("defs").append("marker"),
@@ -116,20 +115,15 @@ export class MarkovGraph {
     
         //------------------------------------------------
         // Links
-        //------------------------------------------------
+        //---------------------------------------x---------  
             
 
         this.graphLinks = this.g.append("g")
             .selectAll("path")
             .data(links)
             .join("path")
-            .attr("stroke", "#888")
-            .attr("stroke-width", 1.25)
-            .attr("fill", "none")
-            .attr("marker-end", "url(#arrowhead)");
 
-
-        // applyAttributes(this.graphLinks, GraphTheme.edge)
+        applyAttributes(this.graphLinks, GraphTheme.edge)
     
         //------------------------------------------------
         // Nodes
@@ -150,12 +144,12 @@ export class MarkovGraph {
                 "link",
                 d3.forceLink(links)
                     .id(d => d.id)
-                    .distance(100)
-                    .strength(1)
+                    .distance(10)
+                    .strength(0.25)
             )
             .force(
                 "charge",
-                d3.forceManyBody().strength(-250)
+                d3.forceManyBody().strength(-1000)
             )
             .force(
                 "center",
@@ -424,5 +418,5 @@ function curvedLinkPath(source, target, curvature = 40, radius = 20) {
 
 
 
-export default { render };
+// export default { render };
 

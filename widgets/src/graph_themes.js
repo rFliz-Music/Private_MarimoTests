@@ -1,5 +1,7 @@
 // graph_theme.js
 
+const edgeColor = "rgba(110, 150, 195, 0.65)";
+
 export const GraphTheme = {
 
     // Contextual menu when hovering over nodes
@@ -49,9 +51,9 @@ export const GraphTheme = {
 
     // Graph Edges
     edge: {
-
-        stroke: "#888",        
-        "stroke-width": 1.25,
+        fill: "none",
+        stroke: edgeColor,        
+        "stroke-width": 1.0,
         "stroke-opacity": 1,
         "marker-end": "url(#arrowhead)"        
     },
@@ -69,7 +71,7 @@ export const GraphTheme = {
 
         path: {
             d: "M 0,-5 L 10,0 L 0,5",            
-            fill: "#888",            
+            fill: edgeColor,            
         }
     },
 

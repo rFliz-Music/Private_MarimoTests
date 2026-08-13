@@ -129,8 +129,6 @@ def _(MarkovHandler, SESSION, SampleBank, SamplerWidget):
 
     w = SamplerWidget(samples=samples)
     handler = MarkovHandler(w, SESSION)
-
-
     w.observe(lambda change: handler.dispatch(change), names="event")   
 
     w

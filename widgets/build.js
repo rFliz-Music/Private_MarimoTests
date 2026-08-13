@@ -1,27 +1,3 @@
-// const esbuild = require("esbuild");
-
-
-// async function main() {
-
-//     const ctx = await esbuild.context({
-//         entryPoints: [
-//             "src/widget_markov_viz.js",
-//             "src/widget_sampler.js",
-//         ],
-//         bundle: true,
-//         outdir: "dist",
-//         format: "esm",
-//     });
-
-//     await ctx.watch();
-
-//     console.log("👀 Watching...");
-
-// }
-
-// main().catch(console.error);
-
-
 const esbuild = require("esbuild");
 
 async function main() {
@@ -30,6 +6,7 @@ async function main() {
         entryPoints: [
             "src/widget_markov_viz.js",
             "src/widget_sampler.js",
+            "src/widget_FULL.js",
         ],
         bundle: true,
         outdir: "dist",

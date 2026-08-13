@@ -43,37 +43,113 @@ def _():
     import numpy as np
 
     from widget_sampler import SampleBank, SamplerWidget
+    from widget_handlers import MarkovHandler
 
-    return Path, anywidget, json, mo, np, traitlets
+    return (
+        EventTuple,
+        MarkovChain,
+        MarkovHandler,
+        Path,
+        SampleBank,
+        anywidget,
+        json,
+        mo,
+        np,
+        traitlets,
+    )
 
 
 @app.cell
-def _(Path, anywidget, traitlets):
+def _(EventTuple, MarkovChain, np):
+
+    def int_noise(span):
+        return np.random.randint(span)-(span*0.5)
+
+    def choice(items):
+        return np.random.choice(items)
+
+    # ------------------------------------------------
+
+    # Markov Chain Stuff
+    NODE_NUM = 8
+    pc_set = np.array([0,2,4,5,7,9,11]) + 48
+    tempo = 0.5
+    mc = MarkovChain()
+
+    # Matrix row random number generator
+    rnGen_rows = np.random.default_rng()
+
+
+    for _ in range(NODE_NUM):
+        pitch = int(choice(pc_set)) + 0
+        vel = int(choice([100,70]))
+        dur = float(choice([0.125,0.111,0.333]) * tempo)
+        delta = float(choice([0.75, 0.25, 0.5, 2]) * tempo)
+
+        mc.add_node(EventTuple(pitch, vel, dur, delta))
+
+
+    # Instructions on how to build a matrix
+    mc.matrix = rnGen_rows.integers(0,2, size=(NODE_NUM, NODE_NUM))
+
+
+
+    SESSION = {'mc': mc}    
+    return (SESSION,)
+
+
+@app.cell
+def _(
+    MarkovHandler,
+    Path,
+    SESSION,
+    SampleBank,
+    anywidget,
+    json,
+    np,
+    traitlets,
+):
+
+    bank = SampleBank("https://cdn.jsdelivr.net/gh/rFliz-music/Private_MarimoTests@main/synth_samples")
+
+    samples = bank.map_chromatic(start_octave=3, num_octaves=2)
+
+
     class MarkovVizWidget(anywidget.AnyWidget):
-        _esm = Path("./widgets/dist/widget_markov_viz.js").read_text()
+        _esm = Path("./widgets/dist/widget_FULL.js").read_text()    
+        _css = "./widgets/dist/widget_sampler.css"
+
+    
         graph_data = traitlets.Unicode("{}").tag(sync=True)
+        samples = traitlets.Dict().tag(sync=True)
+        timeline = traitlets.List().tag(sync=True) # Scheduled Timeline (with start time per event)
 
-    widget = MarkovVizWidget()    
-    return (widget,)
+        chunk = traitlets.Dict().tag(sync=True) # Event Buffer
+        event = traitlets.Dict(default_value={}).tag(sync=True)
 
 
-@app.cell
-def _(json, np, widget):
+
+
+    widgetViz = MarkovVizWidget(samples=samples)   
+    handler = MarkovHandler(widgetViz, SESSION)
+    widgetViz.observe(lambda change: handler.dispatch(change), names="event")   
 
 
     A = np.array([
-        [0.0, 0.1, 0.0, 0.0],
-        [0.1, 0.0, 0.3, 0.0],
-        [0.1, 0.0, 0.0, 0.0],    
-        [0.5, 0.2, 0.1, 0.0],  
+        [0.0, 0.1, 0.0, 0.0, 0.0, 0.0],
+        [0.0, 0.0, 0.1, 0.0, 0.0, 0.0],
+        [0.1, 0.0, 0.0, 0.1, 0.0, 0.0],
+        [0.0, 0.0, 0.0, 0.0, 0.1, 0.0],
+        [0.0, 0.0, 0.0, 0.0, 0.0, 0.1],
+        [0.1, 0.0, 0.0, 0.1, 0.0, 0.0],
     ])
 
-    widget.graph_data = json.dumps({
+    widgetViz.graph_data = json.dumps({
         "matrix": A.tolist(),
         "threshold": 0.01
     })
 
-    widget
+    widgetViz
     return
 
 
@@ -84,6 +160,51 @@ def _():
 
 @app.cell
 def _():
+
+
+    # def int_noise(span):
+    #     return np.random.randint(span)-(span*0.5)
+
+    # def choice(items):
+    #     return np.random.choice(items)
+
+
+
+    # SESSION = {'mc': None}    
+
+
+    # # Markov Chain Stuff
+    # NODE_NUM = 8
+    # pc_set = np.array([0,2,4,5,7,9,11]) + 48
+    # tempo = 0.5
+    # mc = MarkovChain()
+
+    # # Matrix row random number generator
+    # rnGen_rows = np.random.default_rng()
+
+
+
+    # for _ in range(NODE_NUM):
+    #     pitch = int(choice(pc_set)) + 0
+    #     vel = int(choice([100,70]))
+    #     dur = float(choice([0.125,0.111,0.333]) * tempo)
+    #     delta = float(choice([0.75, 0.25, 0.5, 2]) * tempo)
+
+    #     mc.add_node(EventTuple(pitch, vel, dur, delta))
+
+
+    # # Instructions on how to build a matrix
+    # mc.matrix = rnGen_rows.integers(0,2, size=(NODE_NUM, NODE_NUM))
+
+    # # print(mc.nodeDict)
+
+    # SESSION['mc'] = mc
+
+
+
+    # bank = SampleBank("https://cdn.jsdelivr.net/gh/rFliz-music/Private_MarimoTests@main/synth_samples")
+
+    # samples = bank.map_chromatic(start_octave=3, num_octaves=2)
     return
 
 
